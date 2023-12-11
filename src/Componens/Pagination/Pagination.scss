@@ -1,0 +1,18 @@
+.paginate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  .page-item{
+    cursor: pointer;
+  }
+
+  .numberOfPage{
+    width: 40px;
+    margin: 10px;
+    text-align: center;
+  }
+  .totalNumberOfPage{
+    margin-right: 10px;
+  }
+}

@@ -1,0 +1,16 @@
+.add-task-form {
+  background-color: #eee;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  padding: 14px;
+
+  .form-check {
+    input {
+      cursor: pointer;
+      box-shadow: none;
+    }
+    label {
+      cursor: pointer;
+    }
+  }
+}

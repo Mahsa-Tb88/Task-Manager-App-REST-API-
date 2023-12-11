@@ -1,0 +1,19 @@
+.task {
+  justify-content: space-between;
+  align-items: center;
+  .title-box {
+    margin-right: 10px;
+    font-weight: bold;
+  }
+  .status {
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 10px;
+  }
+  .toggle{
+    border-radius: 5px;
+  }
+  .inputEdit{
+    margin-right: 10px;
+  }
+}

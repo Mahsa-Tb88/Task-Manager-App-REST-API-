@@ -1,7 +1,6 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import "./Task.scss";
 import { useState } from "react";
-import { useEffect } from "react";
 
 export default function Task({
   task,
@@ -14,6 +13,7 @@ export default function Task({
   setIsEdit,
 }) {
   const [editTitle, setEditTitle] = useState("");
+  const [idEdit, setIdEdit] = useState(null);
 
   const taskStatus = [
     "btn text-white mx-2",
@@ -26,17 +26,24 @@ export default function Task({
   ].join(" ");
   const inputRef = useRef(null);
 
+  useEffect(() => {
+    if (isEdit.status && isEdit.id == idEdit) {
+      inputRef.current.focus();
+      console.log(inputRef.current);
+    }
+  }, [isEdit]);
   function onEditHandle(id) {
     setIsError({ ...isError, status: false });
     if (!isEdit.status) {
       setIsEdit({ status: true, id: id });
       setEditTitle(task.title);
-    } else {
-      
-
+    } else if (isEdit.status && isEdit.id == id) {
       onEdit(id, editTitle);
+    } else {
+      setIsEdit({ status: true, id: id });
+      setEditTitle(task.title);
     }
-    console.log(inputRef);
+    setIdEdit(id);
   }
 
   return (
@@ -51,7 +58,11 @@ export default function Task({
             />
           </span>
         ) : (
-          <span className="title-box">{task.title}</span>
+          <span className="title-box">
+            {task.title.length < 16
+              ? task.title
+              : task.title.slice(0, 12) + "..."}
+          </span>
         )}
         <span className={taskStatus}>
           {task.completed ? "Completed" : "In Progress"}

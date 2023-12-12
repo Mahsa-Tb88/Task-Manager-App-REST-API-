@@ -1,14 +1,17 @@
+import { useRef, useState } from "react";
 import "./AddTask.scss";
-export default function AddTask({
-  title,
-  setTitle,
-  addTask,
-  completed,
-  setCompleted,
-}) {
+export default function AddTask({ addTask }) {
+  const [title, setTitle] = useState("");
+  const [completed, setCompleted] = useState(false);
+  const inpuRef = useRef(null);
+
   function submitForm(e) {
     e.preventDefault();
-    addTask();
+    addTask(title, completed);
+    setTitle("");
+    setCompleted(false);
+    inpuRef.current.focus();
+    console.log(inpuRef);
   }
   return (
     <div>
@@ -20,6 +23,7 @@ export default function AddTask({
             className="form-control"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            ref={inpuRef}
           />
           <button type="submit" className="btn btn-primary">
             Add Task

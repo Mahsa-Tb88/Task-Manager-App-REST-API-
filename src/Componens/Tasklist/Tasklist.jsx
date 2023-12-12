@@ -16,7 +16,7 @@ export default function Tasklist({
   }
   
   return (
-    <div>
+    <div className="taskList">
       {tasks.map((task) => {
         return (
           <ul className="list-group tasks-list" key={task.id}>

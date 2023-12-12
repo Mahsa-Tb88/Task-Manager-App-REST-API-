@@ -1,9 +1,13 @@
 .task {
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 1rem;
   .title-box {
     margin-right: 10px;
     font-weight: bold;
+    width: 8rem;
+    display: inline-block;
+    
   }
   .status {
     color: #fff;

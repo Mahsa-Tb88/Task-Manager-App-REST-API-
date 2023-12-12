@@ -24,6 +24,7 @@ export default function Filter({ status, changeStatus, search, searchTasks }) {
             name="status"
             id="completed-task"
             value="completed"
+            checked={status == "completed"}
             onChange={() => changeStatus("completed")}
           />
           <label className="form-check-label" htmlFor="completed-task">
@@ -36,7 +37,8 @@ export default function Filter({ status, changeStatus, search, searchTasks }) {
             type="radio"
             name="status"
             id="in-progress-task"
-            value="completed"
+            value="in-progress"
+            checked={status == "in-progress"}
             onChange={() => changeStatus("in-progress")}
           />
           <label className="form-check-label" htmlFor="in-progress-task">

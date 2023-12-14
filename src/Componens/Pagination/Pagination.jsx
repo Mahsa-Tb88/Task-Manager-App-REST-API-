@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./Pagination.scss";
+import "./pagination.scss";
 
 export default function Pagination({
   totalTasks,

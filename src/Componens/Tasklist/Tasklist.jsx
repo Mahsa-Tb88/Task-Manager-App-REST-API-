@@ -1,5 +1,5 @@
 import Task from "../Task/Task";
-import "./Tasklist.scss";
+import "./tasklist.scss";
 
 export default function Tasklist({
   tasks,

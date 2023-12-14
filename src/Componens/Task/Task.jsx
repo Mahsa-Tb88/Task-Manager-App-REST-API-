@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import "./Task.scss";
+import "./task.scss";
 import { useState } from "react";
 
 export default function Task({
@@ -21,7 +21,7 @@ export default function Task({
   ].join(" ");
 
   const taskToggle = [
-    "btn text-white",
+    "btn text-white ",
     task.completed ? "bg-success" : "bg-secondary",
   ].join(" ");
   const inputRef = useRef(null);
@@ -48,7 +48,7 @@ export default function Task({
 
   return (
     <li className="list-group-item d-flex flex-column flex-md-row task">
-      <div>
+      <div className="mb-3 mb-md-0">
         {isEdit.status && isEdit.id == task.id ? (
           <span>
             <input

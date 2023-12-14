@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import "./AddTask.scss";
+import "./addTask.scss";
 export default function AddTask({ addTask }) {
   const [title, setTitle] = useState("");
   const [completed, setCompleted] = useState(false);

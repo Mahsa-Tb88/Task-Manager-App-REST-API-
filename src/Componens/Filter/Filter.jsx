@@ -1,4 +1,4 @@
-import "./Filter.scss";
+import "./filter.scss";
 export default function Filter({ status, changeStatus, search, searchTasks }) {
   console.log("filterComp", status);
   return (

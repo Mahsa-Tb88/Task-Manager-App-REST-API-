@@ -1,11 +1,7 @@
+.taskList {
+  padding: 1rem 0;
 
-.taskList{
+  @media (min-width: 768px) {
     height: 14rem;
-    padding: 1rem 0;
-
+  }
 }
-// .notask{
-//     text-align: center;
-//     font-size: 30px;
-//     margin-top: 20px;
-// }

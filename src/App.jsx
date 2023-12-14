@@ -9,7 +9,6 @@ import {
   editTask,
   getTasks,
 } from "./assets/utiles/restApi";
-import { useRef } from "react";
 export default function App() {
   const [tasks, setTasks] = useState([]);
   const [totalTasks, setTotalTasks] = useState({ all: 0, filtered: 0 });

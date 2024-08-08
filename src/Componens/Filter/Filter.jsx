@@ -1,6 +1,5 @@
 import "./filter.scss";
 export default function Filter({ status, changeStatus, search, searchTasks }) {
-  console.log("filterComp", status);
   return (
     <div className="filter flex-column flex-md-row align-items-md-center ">
       <div>

@@ -9,17 +9,16 @@ export default function Tasklist({
   isEdit,
   setIsEdit,
   setIsError,
-  isError
+  isError,
 }) {
   if (!tasks.length) {
     return <h2 className="text-center my-4">There is no Tasks</h2>;
   }
-  
   return (
     <div className="taskList">
       {tasks.map((task) => {
         return (
-          <ul className="list-group tasks-list" key={task.id}>
+          <ul className="list-group tasks-list" key={task.title}>
             <Task
               task={task}
               onDelete={onDelete}

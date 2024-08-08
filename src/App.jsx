@@ -9,6 +9,7 @@ import {
   editTask,
   getTasks,
 } from "./assets/utiles/restApi";
+
 export default function App() {
   const [tasks, setTasks] = useState([]);
   const [totalTasks, setTotalTasks] = useState({ all: 0, filtered: 0 });
@@ -67,14 +68,15 @@ export default function App() {
   }
 
   async function handelChangeStatus(newStatus) {
-    console.log("change status...");
     setStatus(newStatus);
     setPage(1);
   }
   async function serachHandler(newSearch) {
     setSearch(newSearch);
     setPage(1);
-    setDelay(2000);
+    setDelay(1000);
+    const newTasks = tasks.filter((task) => task.title.includes(newSearch));
+    setTasks(newTasks);
   }
   async function handleChangePage(p) {
     setPage(p);
@@ -82,7 +84,7 @@ export default function App() {
   async function handleDelete(id) {
     const results = await DeleteTask(id);
     if (results.success) {
-      if (tasks.length == 1) {
+      if (tasks.length == 1 && page >= 2) {
         setPage(page - 1);
       } else {
         const results = await getTasks(page, perPage, status, search);
@@ -95,7 +97,7 @@ export default function App() {
   }
 
   async function handleToggle(id) {
-    const findTask = tasks.find((task) => task.id == id);
+    const findTask = tasks.find((task) => task._id == id);
     const result = await editTask(id, findTask.title, !findTask.completed);
     if (result.success) {
       const result2 = await getTasks(page, perPage, status, search);
@@ -111,7 +113,7 @@ export default function App() {
     }
   }
   async function handleEdit(id, editTitle) {
-    const selectedTask = tasks.find((task) => task.id == id);
+    const selectedTask = tasks.find((task) => task._id == id);
     if (editTitle.length < 3) {
       setIsError({
         status: true,
@@ -119,26 +121,31 @@ export default function App() {
       });
       return;
     }
+
     const result = await editTask(id, editTitle, selectedTask.completed);
     setIsError({ ...isError, status: false });
 
     if (result.success) {
       const newTasks = tasks.map((task) => {
-        if (task.id == id) {
-          return { id, title: editTitle, completed: selectedTask.completed };
+        if (task._id == id) {
+          return {
+            _id: id,
+            title: editTitle,
+            completed: selectedTask.completed,
+          };
         } else {
           return task;
         }
       });
       setTasks(newTasks);
-      setIsEdit({ status: false, id: id });
+      setIsEdit({ status: false, id });
     } else {
       setIsError({ status: true, msg: result.msg });
     }
   }
 
   return (
-    <div className="container">
+    <div className="container ">
       <h1 className="text-center my-4">Text Manager App</h1>
       <AddTask addTask={addTaskHandler} />
       <Filter
@@ -147,31 +154,33 @@ export default function App() {
         search={search}
         searchTasks={serachHandler}
       />
-      {isError.status ? (
+      {isError.status && (
         <h2 className="bg-danger text-center py-3 my-5 rounded-1 text-white">
           {isError.msg}
         </h2>
-      ) : (
-        ""
       )}
-      <Tasklist
-        tasks={tasks}
-        onDelete={handleDelete}
-        changeToggle={handleToggle}
-        onEdit={handleEdit}
-        isEdit={isEdit}
-        setIsEdit={setIsEdit}
-        setIsError={setIsError}
-        isError={isError}
-      />
 
-      <Pagination
-        page={page}
-        setPage={setPage}
-        totalPage={totalPage}
-        changePage={handleChangePage}
-        totalTasks={totalTasks}
-      />
+      <div>
+        <Tasklist
+          tasks={tasks}
+          onDelete={handleDelete}
+          changeToggle={handleToggle}
+          onEdit={handleEdit}
+          isEdit={isEdit}
+          setIsEdit={setIsEdit}
+          setIsError={setIsError}
+          isError={isError}
+        />
+        {totalPage >= 2 && (
+          <Pagination
+            page={page}
+            setPage={setPage}
+            totalPage={totalPage}
+            changePage={handleChangePage}
+            totalTasks={totalTasks}
+          />
+        )}
+      </div>
     </div>
   );
 }

@@ -29,9 +29,9 @@ export default function Task({
   useEffect(() => {
     if (isEdit.status && isEdit.id == idEdit) {
       inputRef.current.focus();
-      console.log(inputRef.current);
     }
   }, [isEdit]);
+
   function onEditHandle(id) {
     setIsError({ ...isError, status: false });
     if (!isEdit.status) {
@@ -49,7 +49,7 @@ export default function Task({
   return (
     <li className="list-group-item d-flex flex-column flex-md-row task">
       <div className="mb-3 mb-md-0">
-        {isEdit.status && isEdit.id == task.id ? (
+        {isEdit.status && isEdit.id == task._id ? (
           <span>
             <input
               value={editTitle}
@@ -69,16 +69,16 @@ export default function Task({
         </span>
       </div>
       <div className="actions">
-        <button className={taskToggle} onClick={() => changeToggle(task.id)}>
+        <button className={taskToggle} onClick={() => changeToggle(task._id)}>
           Toggle
         </button>
         <button
           className="btn btn-primary mx-2"
-          onClick={() => onEditHandle(task.id)}
+          onClick={() => onEditHandle(task._id)}
         >
-          {isEdit.id == task.id && isEdit.status ? "Save" : "Edit"}
+          {isEdit.id == task._id && isEdit.status ? "Save" : "Edit"}
         </button>
-        <button className="btn btn-danger" onClick={() => onDelete(task.id)}>
+        <button className="btn btn-danger" onClick={() => onDelete(task._id)}>
           Delete
         </button>
       </div>

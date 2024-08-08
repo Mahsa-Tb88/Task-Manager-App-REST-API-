@@ -11,7 +11,6 @@ export default function AddTask({ addTask }) {
     setTitle("");
     setCompleted(false);
     inpuRef.current.focus();
-    console.log(inpuRef);
   }
   return (
     <div>
